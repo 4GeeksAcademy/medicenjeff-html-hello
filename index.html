@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f6f5">
+    <title>AgentHub | Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+      @custom-variant dark (&:where(.dark, .dark *));
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="min-h-screen bg-[#f4f6f5] font-['DM_Sans'] text-slate-900 antialiased dark:bg-zinc-950 dark:text-slate-50">
+    <div id="mobile-overlay" class="fixed inset-0 z-30 hidden bg-slate-950/40 lg:hidden" aria-hidden="true"></div>
+    <div class="flex min-h-screen">
+      <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 flex w-[248px] -translate-x-full flex-col border-r border-slate-200 bg-white transition-transform duration-200 dark:border-slate-800 dark:bg-slate-900 lg:static lg:translate-x-0" aria-label="Main navigation">
+        <div class="flex h-[76px] items-center gap-3 border-b border-slate-100 px-6">
+          <div class="flex size-9 items-center justify-center rounded-lg bg-slate-950 text-white" aria-hidden="true"><i data-lucide="orbit" class="size-5"></i></div>
+          <div>
+            <p class="text-[15px] font-bold tracking-tight text-slate-950">AgentHub</p>
+            <p class="text-[11px] text-slate-500">WORKSPACE ADMIN</p>
+          </div>
+          <button id="mobile-close" class="ml-auto flex size-9 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800 lg:hidden" aria-label="Close navigation"><i data-lucide="x" class="size-5"></i></button>
+        </div>
+        <div class="px-4 pt-7">
+          <p class="px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">Workspace</p>
+          <nav class="mt-3 space-y-1" aria-label="Workspace sections">
+            <a href="#dashboard" data-nav="dashboard" aria-current="page" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-slate-950 bg-slate-100 px-3 text-sm font-semibold text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="layout-dashboard" class="size-[17px]"></i><span>Dashboard</span></a>
+            <a href="#agents" data-nav="agents" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-transparent px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="bot" class="size-[17px]"></i><span>Gestión de agentes</span><span id="agent-nav-count" class="ml-auto font-mono text-[11px] text-slate-400">12</span></a>
+            <a href="#skills" data-nav="skills" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-transparent px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="workflow" class="size-[17px]"></i><span>Skills</span></a>
+            <a href="#integrations" data-nav="integrations" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-transparent px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="blocks" class="size-[17px]"></i><span>Integrations</span></a>
+            <a href="#activity" data-nav="activity" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-transparent px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="list-checks" class="size-[17px]"></i><span>Activity</span></a>
+            <a href="#errors" data-nav="errors" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-transparent px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="shield-alert" class="size-[17px]"></i><span>Log de errores</span></a>
+            <a href="#users" data-nav="users" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-transparent px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="users-round" class="size-[17px]"></i><span>Gestión de usuarios</span></a>
+            <a href="#contracts" data-nav="contracts" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-transparent px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="file-signature" class="size-[17px]"></i><span>Contrataciones de agentes</span></a>
+            <a href="#settings" data-nav="settings" class="flex h-10 items-center gap-3 rounded-md border-l-2 border-transparent px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="settings-2" class="size-[17px]"></i><span>Settings</span></a>
+          </nav>
+        </div>
+        <div class="mt-auto border-t border-slate-100 p-4">
+          <div class="mt-3 flex items-center gap-3 rounded-md px-3 py-3">
+            <div class="flex size-8 items-center justify-center rounded-full bg-teal-100 text-xs font-bold text-teal-800" aria-hidden="true">JD</div>
+            <div class="min-w-0 flex-1"><p id="sidebar-admin-name" class="truncate text-xs font-semibold text-slate-800">Jordan Davis</p><p class="truncate text-[11px] text-slate-500">Workspace admin</p></div>
+            <button class="flex size-8 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800" data-nav="settings" aria-label="Open settings"><i data-lucide="ellipsis" class="size-4"></i></button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="flex min-h-screen min-w-0 flex-1 flex-col">
+        <header class="sticky top-0 z-20 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95 sm:px-7 lg:px-9">
+          <div class="flex items-center gap-3">
+            <button id="mobile-open" class="flex size-9 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800 lg:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar"><i data-lucide="menu" class="size-5"></i></button>
+            <div class="hidden items-center gap-2 text-xs text-slate-400 sm:flex"><span>Workspace</span><i data-lucide="chevron-right" class="size-3"></i><span id="breadcrumb" class="font-medium text-slate-600">Dashboard</span></div>
+            <span id="mobile-breadcrumb" class="text-sm font-semibold text-slate-800 sm:hidden">Dashboard</span>
+          </div>
+          <div class="flex items-center gap-2 sm:gap-4">
+            <span class="hidden items-center gap-2 rounded-full border border-slate-200 px-2.5 py-1 text-[11px] font-medium text-slate-600 sm:inline-flex"><span class="size-1.5 rounded-full bg-emerald-500"></span>All systems operational</span>
+            <button id="theme-toggle" type="button" class="inline-flex h-9 items-center gap-2 rounded-md px-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white" aria-label="Switch to dark mode" aria-pressed="false" title="Toggle color theme"><i data-lucide="moon" class="size-[17px]"></i><span id="theme-label" class="hidden sm:inline">Dark mode</span></button>
+            <button class="flex size-9 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800" aria-label="Notifications"><i data-lucide="bell" class="size-[17px]"></i></button>
+            <div class="flex size-8 items-center justify-center rounded-full bg-teal-100 text-[11px] font-bold text-teal-800 sm:hidden" aria-hidden="true">JD</div>
+          </div>
+        </header>
+
+        <main id="view-root" class="mx-auto w-full max-w-[1440px] flex-1 px-4 py-6 sm:px-7 sm:py-8 lg:px-10 lg:py-9" tabindex="-1"></main>
+        <footer class="flex items-center justify-between border-t border-slate-200 bg-white px-4 py-3 text-[11px] text-slate-400 dark:border-slate-800 dark:bg-slate-900 sm:px-7 lg:px-10"><span>AgentHub workspace</span><span>Demo data · Stored in this browser</span></footer>
+      </div>
+    </div>
+
+    <dialog id="app-dialog" class="w-[min(100%-2rem,36rem)] max-w-none rounded-lg border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/40 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-50">
+      <form id="dialog-form" class="flex flex-col" novalidate>
+        <div class="flex items-start justify-between gap-4 border-b border-slate-100 px-5 py-4 sm:px-6">
+          <div><h2 id="dialog-title" class="text-base font-semibold text-slate-950"></h2><p id="dialog-description" class="mt-1 text-sm text-slate-500"></p></div>
+          <button type="button" data-close-dialog class="flex size-8 shrink-0 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800" aria-label="Close dialog"><i data-lucide="x" class="size-4"></i></button>
+        </div>
+        <div id="dialog-content" class="max-h-[65vh] overflow-y-auto px-5 py-5 sm:px-6"></div>
+        <div id="dialog-error" class="hidden px-5 pb-3 text-sm text-rose-700 sm:px-6" role="alert"></div>
+        <div class="flex justify-end gap-2 border-t border-slate-100 px-5 py-4 sm:px-6">
+          <button type="button" data-close-dialog class="h-9 rounded-md border border-slate-200 px-3.5 text-sm font-medium text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800">Cancel</button>
+          <button id="dialog-submit" type="submit" class="h-9 rounded-md bg-slate-950 px-3.5 text-sm font-semibold text-white hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800">Save changes</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" class="pointer-events-none fixed bottom-5 right-5 z-50 hidden max-w-sm items-center gap-2 rounded-md bg-slate-950 px-4 py-3 text-sm font-medium text-white shadow-xl" role="status" aria-live="polite"><i data-lucide="circle-check" class="size-4 shrink-0 text-emerald-300"></i><span id="toast-message"></span></div>
+
+    <script>
+      const STORAGE_KEY = 'agenthub-demo-v1';
+      const initialData = {
+        agents: [
+          { id: 'ag-01', name: 'Support Concierge', description: 'Handles inbound customer questions', status: 'Active', skills: ['Customer support', 'Knowledge search'], lastRun: '2 min ago' },
+          { id: 'ag-02', name: 'Invoice Processor', description: 'Extracts and validates invoice data', status: 'Active', skills: ['Document extraction', 'Data validation'], lastRun: '18 min ago' },
+          { id: 'ag-03', name: 'Research Briefing', description: 'Summarizes market research', status: 'Paused', skills: ['Web research', 'Summarization'], lastRun: 'Yesterday' },
+          { id: 'ag-04', name: 'Lead Qualifier', description: 'Scores new sales opportunities', status: 'Active', skills: ['Lead scoring', 'CRM updates'], lastRun: '1 hr ago' },
+          { id: 'ag-05', name: 'Release Notes Writer', description: 'Drafts product release summaries', status: 'Active', skills: ['Summarization', 'Writing'], lastRun: '3 hrs ago' },
+          { id: 'ag-06', name: 'Feedback Classifier', description: 'Tags product feedback by theme', status: 'Paused', skills: ['Classification', 'Sentiment analysis'], lastRun: 'Monday' },
+          { id: 'ag-07', name: 'Meeting Follow-up', description: 'Turns meeting notes into action items', status: 'Active', skills: ['Summarization', 'Writing'], lastRun: '4 hrs ago' },
+          { id: 'ag-08', name: 'Order Status Assistant', description: 'Finds updates for customer orders', status: 'Active', skills: ['Customer support', 'Knowledge search'], lastRun: '5 hrs ago' },
+          { id: 'ag-09', name: 'Contract Reviewer', description: 'Flags clauses for a second review', status: 'Paused', skills: ['Document extraction', 'Data validation'], lastRun: 'Tuesday' },
+          { id: 'ag-10', name: 'Content Localizer', description: 'Prepares drafts for regional review', status: 'Active', skills: ['Writing', 'Summarization'], lastRun: 'Yesterday' },
+          { id: 'ag-11', name: 'Survey Analyst', description: 'Groups survey responses by theme', status: 'Active', skills: ['Classification', 'Sentiment analysis'], lastRun: 'Yesterday' },
+          { id: 'ag-12', name: 'Knowledge Curator', description: 'Finds gaps in workspace articles', status: 'Paused', skills: ['Knowledge search', 'Web research'], lastRun: 'Oct 9' }
+        ],
+        integrations: [
+          { id: 'int-01', name: 'Slack', initials: 'S', color: 'bg-violet-100 text-violet-800', description: 'Send alerts and agent summaries to channels', connected: true },
+          { id: 'int-02', name: 'Notion', initials: 'N', color: 'bg-slate-200 text-slate-800', description: 'Read and update workspace knowledge', connected: true },
+          { id: 'int-03', name: 'HubSpot', initials: 'H', color: 'bg-orange-100 text-orange-800', description: 'Sync lead and customer records', connected: false },
+          { id: 'int-04', name: 'Google Drive', initials: 'G', color: 'bg-emerald-100 text-emerald-800', description: 'Access files used by your agents', connected: false }
+        ],
+        activity: [
+          { id: 'ev-01', date: '2026-10-13T10:42:00', actor: 'Support Concierge', action: 'Completed run', resource: 'Customer question · #4821', result: 'Success', detail: 'Resolved a billing question using the workspace help center.' },
+          { id: 'ev-02', date: '2026-10-13T10:18:00', actor: 'Jordan Davis', action: 'Updated settings', resource: 'Agent: Invoice Processor', result: 'Success', detail: 'Changed the run schedule to every 30 minutes.' },
+          { id: 'ev-03', date: '2026-10-13T09:56:00', actor: 'Invoice Processor', action: 'Completed run', resource: 'Invoice · INV-2048', result: 'Success', detail: 'Extracted 12 fields and validated the vendor record.' },
+          { id: 'ev-04', date: '2026-10-13T09:31:00', actor: 'Research Briefing', action: 'Run failed', resource: 'Weekly market report', result: 'Failed', detail: 'The source document was unavailable. No data was changed.' },
+          { id: 'ev-05', date: '2026-10-13T08:44:00', actor: 'Jordan Davis', action: 'Paused agent', resource: 'Agent: Research Briefing', result: 'Success', detail: 'Paused the agent from the Agents page.' },
+          { id: 'ev-06', date: '2026-10-12T16:22:00', actor: 'Lead Qualifier', action: 'Completed run', resource: 'Lead · Northstar Labs', result: 'Success', detail: 'Assigned a qualification score of 84.' },
+          { id: 'ev-07', date: '2026-10-12T15:04:00', actor: 'Jordan Davis', action: 'Connected integration', resource: 'Notion', result: 'Success', detail: 'Enabled the local demo connection state.' }
+        ],
+        settings: { workspace: 'Northstar Studio', admin: 'Jordan Davis', failedRuns: true, weeklySummary: false, darkMode: false }
+      };
+
+      function defaultAgentPrompt(agent) {
+        return `You are ${agent.name}, an AI agent for the Northstar Studio workspace. ${agent.description}. Be accurate, concise, and ask for clarification when needed. Never invent facts or claim actions you did not complete.`;
+      }
+
+      function normalizeAgents(agents) {
+        const owners = ['Jordan Davis', 'Mina Patel', 'Chris Bennett', 'Jordan Davis'];
+        return agents.map((agent, index) => ({
+          ...agent,
+          owner: agent.owner || owners[index % owners.length],
+          systemPrompt: agent.systemPrompt || defaultAgentPrompt(agent)
+        }));
+      }
+
+      function loadErrorEntries() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(ERROR_STORAGE_KEY));
+          if (Array.isArray(saved)) return initialErrorEntries.map(entry => ({ ...entry, ...(saved.find(item => item.id === entry.id) || {}) }));
+        } catch (error) {
+          console.warn('Could not load saved error states.', error);
+        }
+        return structuredClone(initialErrorEntries);
+      }
+
+      function persistErrorEntries() {
+        try {
+          localStorage.setItem(ERROR_STORAGE_KEY, JSON.stringify(errorEntries));
+        } catch (error) {
+          console.warn('Could not save error states.', error);
+        }
+      }
+
+      function loadData() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+          if (saved && Array.isArray(saved.agents) && Array.isArray(saved.integrations) && Array.isArray(saved.activity) && saved.settings) {
+            saved.agents = normalizeAgents(saved.agents);
+            return saved;
+          }
+        } catch (error) {
+          console.warn('Could not load saved demo data.', error);
+        }
+        const freshData = structuredClone(initialData);
+        freshData.agents = normalizeAgents(freshData.agents);
+        return freshData;
+      }
+
+      let data = loadData();
+      let currentView = location.hash.replace('#', '') || 'dashboard';
+      let modalAction = null;
+      let lastFocusedElement = null;
+      let toastTimer;
+
+      const viewRoot = document.getElementById('view-root');
+      const dialog = document.getElementById('app-dialog');
+      const dialogForm = document.getElementById('dialog-form');
+      const navTitles = { dashboard: 'Dashboard', agents: 'Gestión de agentes', skills: 'Skills', integrations: 'Integrations', activity: 'Activity', errors: 'Log de errores', users: 'Gestión de usuarios', contracts: 'Contrataciones de agentes', settings: 'Settings' };
+      let userRecords = [
+        { id: 'USR-1042', name: 'Alex Morgan', email: 'alex.morgan@example.com', plan: 'Enterprise', status: 'Activo', role: 'Administrador', joined: '2025-02-14', lastAccess: '2026-10-13 09:42' },
+        { id: 'USR-1038', name: 'Priya Sharma', email: 'priya.sharma@example.com', plan: 'Pro', status: 'Activo', role: 'Editor', joined: '2025-04-03', lastAccess: '2026-10-12 16:18' },
+        { id: 'USR-1027', name: 'Mateo Alvarez', email: 'mateo.alvarez@example.com', plan: 'Pro', status: 'Pendiente', role: 'Editor', joined: '2025-08-22', lastAccess: 'Sin acceso' },
+        { id: 'USR-1019', name: 'Dana Chen', email: 'dana.chen@example.com', plan: 'Starter', status: 'Suspendido', role: 'Viewer', joined: '2025-11-09', lastAccess: '2026-09-28 11:05' },
+        { id: 'USR-1006', name: 'Sam Wilson', email: 'sam.wilson@example.com', plan: 'Enterprise', status: 'Activo', role: 'Administrador', joined: '2024-12-18', lastAccess: '2026-10-13 08:31' },
+        { id: 'USR-0994', name: 'Noor Haddad', email: 'noor.haddad@example.com', plan: 'Starter', status: 'Activo', role: 'Viewer', joined: '2026-01-12', lastAccess: '2026-10-11 14:52' }
+      ];
+      const agentContracts = [
+        { id: 'CT-2026-041', client: 'Northstar Studio', agent: 'Support Concierge', skills: [{ name: 'Customer support', price: 220 }, { name: 'Knowledge search', price: 160 }, { name: 'Sentiment analysis', price: 120 }], startDate: '15 ene 2026', endDate: '14 ene 2027', amountPaid: 500, paymentStatus: 'Pagado', paymentDate: '15 ene 2026', paymentMethod: 'Visa terminada en 4242' },
+        { id: 'CT-2026-038', client: 'Aster Health', agent: 'Invoice Processor', skills: [{ name: 'Document extraction', price: 260 }, { name: 'Data validation', price: 190 }], startDate: '01 feb 2026', endDate: '31 ene 2027', amountPaid: 450, paymentStatus: 'Pagado', paymentDate: '01 feb 2026', paymentMethod: 'Transferencia bancaria' },
+        { id: 'CT-2026-032', client: 'Lumen Retail', agent: 'Lead Qualifier', skills: [{ name: 'CRM updates', price: 190 }, { name: 'Customer support', price: 180 }], startDate: '10 mar 2026', endDate: '09 mar 2027', amountPaid: 370, paymentStatus: 'Pagado', paymentDate: '10 mar 2026', paymentMethod: 'Mastercard terminada en 1088' },
+        { id: 'CT-2026-027', client: 'Juniper Analytics', agent: 'Research Briefing', skills: [{ name: 'Web research', price: 210 }, { name: 'Summarization', price: 130 }, { name: 'Writing', price: 110 }], startDate: '01 abr 2026', endDate: '31 mar 2027', amountPaid: 450, paymentStatus: 'Pagado', paymentDate: '01 abr 2026', paymentMethod: 'Visa terminada en 7721' },
+        { id: 'CT-2026-019', client: 'Bloom Creative', agent: 'Release Notes Writer', skills: [{ name: 'Writing', price: 180 }, { name: 'Summarization', price: 140 }], startDate: '15 may 2026', endDate: '14 may 2027', amountPaid: 320, paymentStatus: 'Pagado', paymentDate: '15 may 2026', paymentMethod: 'Transferencia bancaria' }
+      ];
+      const ERROR_STORAGE_KEY = 'agenthub-errors-v1';
+      const initialErrorEntries = [
+        { id: 'ERR-2026-018', timestamp: '2026-10-13 10:24:53 UTC', agent: 'Support Concierge', type: 'Timeout', code: 'ERR-504', description: 'La búsqueda de conocimiento superó el tiempo límite.', message: 'Knowledge search request timed out after 30 seconds.', details: 'The agent waited 30 seconds for a response from the knowledge index. The run stopped before sending a reply.' },
+        { id: 'ERR-2026-017', timestamp: '2026-10-13 09:58:11 UTC', agent: 'Invoice Processor', type: 'Validation', code: 'ERR-422', description: 'No se encontró el número de factura obligatorio.', message: 'Validation failed: invoice_number is required.', details: 'The document parser returned an empty invoice_number field. The invoice was not added to the review queue.' },
+        { id: 'ERR-2026-016', timestamp: '2026-10-13 09:32:40 UTC', agent: 'Lead Qualifier', type: 'Rate limit', code: 'ERR-429', description: 'El CRM rechazó la solicitud por exceso de peticiones.', message: 'CRM API returned 429 Too Many Requests.', details: 'The integration reached its hourly request limit while updating the lead score. Retry after the provider limit resets.' },
+        { id: 'ERR-2026-015', timestamp: '2026-10-13 08:47:06 UTC', agent: 'Research Briefing', type: 'Tool error', code: 'ERR-TOOL-07', description: 'La herramienta de búsqueda no pudo abrir una fuente.', message: 'Browser tool failed to load source: https://example.invalid/report.', details: 'The source was unreachable after three attempts. The summary was generated without this source.' },
+        { id: 'ERR-2026-014', timestamp: '2026-10-12 17:16:29 UTC', agent: 'Feedback Classifier', type: 'Authentication', code: 'ERR-401', description: 'La integración de comentarios requiere volver a autorizarse.', message: 'Provider returned 401 Unauthorized for workspace connection.', details: 'The demo credential has expired. Reconnect the integration before the next scheduled run.' },
+        { id: 'ERR-2026-013', timestamp: '2026-10-12 15:03:18 UTC', agent: 'Release Notes Writer', type: 'Context limit', code: 'ERR-413', description: 'El documento superó el límite de contexto del agente.', message: 'Input token count exceeded the configured context window.', details: 'The release notes source contained more content than the agent can process in one run. Split the document or reduce the selected sections.' }
+      ];
+      const errorEntries = loadErrorEntries();
+      const skillGroups = [
+        { name: 'Customer operations', skills: [{ name: 'Customer support', description: 'Respond to questions with a clear, helpful tone.', users: ['Support Concierge'] }, { name: 'Knowledge search', description: 'Find answers in approved workspace knowledge.', users: ['Support Concierge'] }, { name: 'Sentiment analysis', description: 'Identify the tone and urgency of customer messages.', users: ['Feedback Classifier'] }] },
+        { name: 'Data and research', skills: [{ name: 'Document extraction', description: 'Extract structured fields from documents.', users: ['Invoice Processor'] }, { name: 'Web research', description: 'Collect and synthesize public-source research.', users: ['Research Briefing'] }, { name: 'Data validation', description: 'Check values for completeness and consistency.', users: ['Invoice Processor'] }] },
+        { name: 'Productivity', skills: [{ name: 'Summarization', description: 'Turn long content into concise summaries.', users: ['Research Briefing', 'Release Notes Writer'] }, { name: 'CRM updates', description: 'Prepare structured changes to customer records.', users: ['Lead Qualifier'] }, { name: 'Writing', description: 'Draft clear, consistent business content.', users: ['Release Notes Writer'] }] }
+      ];
+
+      const templates = {
+        dashboard: () => `
+          <section aria-labelledby="page-title">
+            <div class="flex flex-wrap items-end justify-between gap-4">
+              <div><p class="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Monday, October 13, 2026</p><h1 id="page-title" class="mt-2 text-[26px] font-semibold tracking-tight text-slate-950">Good morning, Jordan</h1><p class="mt-1 text-sm text-slate-500">Here is what's happening across your workspace.</p></div>
+              <a href="#agents" data-nav="agents" class="inline-flex h-9 items-center gap-2 rounded-md bg-slate-950 px-3.5 text-sm font-semibold text-white hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="plus" class="size-4"></i>New agent</a>
+            </div>
+            <div class="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              ${metricCard('Total revenue', '$48,290', 'This month', 'banknote', 'bg-blue-50 text-blue-700', '+8.2%')}
+              ${metricCard('Discount losses', '$3,840', 'This month', 'badge-percent', 'bg-amber-50 text-amber-700', '12.4% of revenue')}
+              ${metricCard('Active agents', '8', 'Currently running', 'bot', 'bg-emerald-50 text-emerald-700', 'Online')}
+              ${metricCard('Failing agents', '2', 'Need attention', 'triangle-alert', 'bg-rose-50 text-rose-700', 'Review')}
+            </div>
+            <div class="mt-5">
+              <section class="rounded-lg border border-slate-200 bg-white" aria-labelledby="weekly-title">
+                <div class="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 px-5 py-4 sm:px-6"><div><h2 id="weekly-title" class="text-sm font-semibold text-slate-900">Weekly activity</h2><p class="mt-1 text-xs text-slate-500">Agent runs over the last 7 days</p></div><div class="text-right"><p class="font-mono text-xl font-semibold tracking-tight text-slate-950">1,284</p><p class="text-[11px] text-slate-500">total runs</p></div></div>
+                <div class="px-4 pb-4 pt-5 sm:px-6"><div class="grid h-[190px] grid-cols-7 items-end gap-2 border-b border-slate-100 sm:gap-4" aria-label="Run counts by day: Monday 138, Tuesday 162, Wednesday 149, Thursday 193, Friday 221, Saturday 178, Sunday 243">
+                  ${chartBar('Mon', '138', 'h-[56px]', false)}${chartBar('Tue', '162', 'h-[72px]', false)}${chartBar('Wed', '149', 'h-[64px]', false)}${chartBar('Thu', '193', 'h-[96px]', false)}${chartBar('Fri', '221', 'h-[124px]', false)}${chartBar('Sat', '178', 'h-[84px]', false)}${chartBar('Sun', '243', 'h-[148px]', true)}
+                </div><div class="mt-3 flex items-center justify-between text-[11px] text-slate-400"><span>Oct 7</span><span class="inline-flex items-center gap-1.5"><span class="size-2 rounded-sm bg-teal-600"></span>Runs per day</span><span>Oct 13</span></div></div>
+              </section>
+            </div>
+            <div class="mt-5">
+              <section class="rounded-lg border border-slate-200 bg-white" aria-labelledby="recent-title">
+                <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6"><div><h2 id="recent-title" class="text-sm font-semibold text-slate-900">Recently used agents</h2><p class="mt-1 text-xs text-slate-500">Latest workspace activity</p></div><a href="#agents" data-nav="agents" class="text-xs font-semibold text-slate-600 hover:text-teal-700">View all <span aria-hidden="true">→</span></a></div>
+                <ul class="divide-y divide-slate-100 px-5 sm:px-6">${recentAgent('Support Concierge', 'Customer questions', '2 min ago', 'Active', 'SC', 'bg-teal-100 text-teal-800')}${recentAgent('Invoice Processor', 'Document extraction', '18 min ago', 'Active', 'IP', 'bg-amber-100 text-amber-800')}${recentAgent('Lead Qualifier', 'Sales pipeline', '1 hr ago', 'Active', 'LQ', 'bg-blue-100 text-blue-800')}</ul>
+              </section>
+            </div>
+            <div class="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 sm:px-6"><div class="flex items-center gap-3"><span class="flex size-9 items-center justify-center rounded-md bg-emerald-50 text-emerald-700"><i data-lucide="shield-check" class="size-[18px]"></i></span><div><p class="text-sm font-semibold text-slate-800">Workspace health is good</p><p class="text-xs text-slate-500">All connected services are responding normally.</p></div></div><a href="#integrations" data-nav="integrations" class="text-xs font-semibold text-slate-600 hover:text-teal-700">Manage integrations <span aria-hidden="true">→</span></a></div>
+          </section>`,
+
+        agents: () => `
+          <section aria-labelledby="page-title">
+            ${pageHeading('Gestión de agentes', 'Manage your AI agents and their assigned skills.', `<button data-action="new-agent" class="inline-flex h-9 items-center gap-2 rounded-md bg-slate-950 px-3.5 text-sm font-semibold text-white hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="plus" class="size-4"></i>New agent</button>`)}
+            <div class="mt-7 overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <div class="flex flex-col gap-3 border-b border-slate-100 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-5"><p class="text-sm font-semibold text-slate-800"><span id="agent-result-count">${data.agents.length}</span> agents</p><div class="flex flex-col gap-2 sm:flex-row"><label class="relative"><span class="sr-only">Search agents</span><i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400"></i><input id="agent-search" type="search" placeholder="Search agents..." class="h-9 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-200 sm:w-56"></label><label><span class="sr-only">Filter agents by status</span><select id="agent-status-filter" class="h-9 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-700 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200 sm:w-36"><option value="All">All statuses</option><option value="Active">Active</option><option value="Paused">Paused</option></select></label></div></div>
+              <div class="overflow-x-auto"><table class="w-full min-w-[940px] border-collapse text-left"><thead><tr class="bg-slate-50 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500"><th class="px-5 py-3">Agent</th><th class="px-4 py-3">Owner</th><th class="px-4 py-3">Status</th><th class="px-4 py-3">Assigned skills</th><th class="px-4 py-3">Last run</th><th class="w-12 px-4 py-3"><span class="sr-only">Actions</span></th></tr></thead><tbody id="agent-table-body" class="divide-y divide-slate-100"></tbody></table></div>
+              <div id="agent-empty" class="hidden px-5 py-14 text-center"><span class="mx-auto flex size-10 items-center justify-center rounded-full bg-slate-100 text-slate-500"><i data-lucide="search-x" class="size-5"></i></span><p class="mt-3 text-sm font-semibold text-slate-800">No agents found</p><p class="mt-1 text-xs text-slate-500">Try another name or clear your filters.</p><button data-action="clear-agent-filters" class="mt-4 text-xs font-semibold text-teal-700 hover:text-teal-900">Clear filters</button></div>
+            </div>
+            <p class="mt-3 text-xs text-slate-400">Changes are saved locally in this browser for the demo.</p>
+          </section>`,
+
+        skills: () => `
+          <section aria-labelledby="page-title">
+            ${pageHeading('Skills', 'Reusable capabilities available to your agents.', '<span class="inline-flex h-8 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-600"><i data-lucide="sparkles" class="size-3.5"></i><span id="skill-total-count">9 skills</span></span>')}
+            <div class="mt-7 grid grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
+              <section class="overflow-hidden rounded-lg border border-slate-200 bg-white" aria-label="Skills catalog"><div class="border-b border-slate-100 px-5 py-4"><h2 class="text-sm font-semibold text-slate-900">Skill catalog</h2><p class="mt-1 text-xs text-slate-500">Select a skill to see where it is used.</p></div><div class="divide-y divide-slate-100">${skillGroups.map((group, index) => `<section><h3><button type="button" data-action="toggle-category" data-category="${index}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="skill-group-${index}" class="flex w-full items-center justify-between px-5 py-3.5 text-left text-xs font-semibold text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-slate-800"><span class="flex items-center gap-2"><i data-lucide="folder" class="size-4 text-slate-400"></i>${escapeHtml(group.name)}<span class="font-mono text-[10px] font-normal text-slate-400">${group.skills.length}</span></span><i data-lucide="chevron-down" class="size-4 transition-transform ${index === 0 ? 'rotate-180' : ''}"></i></button></h3><div id="skill-group-${index}" class="${index === 0 ? '' : 'hidden'} divide-y divide-slate-100 bg-slate-50/60">${group.skills.map(skill => skillRow(skill)).join('')}</div></section>`).join('')}</div></section>
+              <aside class="h-fit rounded-lg border border-slate-200 bg-white" aria-label="Selected skill details"><div class="border-b border-slate-100 px-5 py-4"><h2 class="text-sm font-semibold text-slate-900">Skill details</h2><p class="mt-1 text-xs text-slate-500">Choose a skill from the catalog.</p></div><div id="skill-detail" class="px-5 py-5"><div class="flex size-10 items-center justify-center rounded-md bg-blue-50 text-blue-700"><i data-lucide="workflow" class="size-5"></i></div><p class="mt-4 text-sm font-semibold text-slate-800">Explore your skill catalog</p><p class="mt-1 text-xs leading-5 text-slate-500">Select a skill to review its description and assign it to agents.</p></div></aside>
+            </div>
+          </section>`,
+
+        integrations: () => `
+          <section aria-labelledby="page-title">
+            ${pageHeading('Integrations', 'Manage the tools available to your workspace.', '<span class="inline-flex h-8 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-600"><i data-lucide="plug" class="size-3.5"></i><span id="integration-connected-count"></span></span>')}
+            <div class="mt-7 overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <div class="flex flex-col gap-3 border-b border-slate-100 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-5"><div><h2 class="text-sm font-semibold text-slate-900">Available integrations</h2><p class="mt-1 text-xs text-slate-500">Demo connections do not contact external services.</p></div><label><span class="sr-only">Filter integrations by connection status</span><select id="integration-filter" class="h-9 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-700 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200 sm:w-40"><option value="All">All integrations</option><option value="Connected">Connected</option><option value="Not connected">Not connected</option></select></label></div>
+              <div id="integration-list" class="divide-y divide-slate-100"></div>
+              <div id="integration-empty" class="hidden px-5 py-12 text-center"><p class="text-sm font-semibold text-slate-800">No integrations match</p><button data-action="clear-integration-filter" class="mt-2 text-xs font-semibold text-teal-700">Clear filter</button></div>
+            </div>
+          </section>`,
+
+        activity: () => `
+          <section aria-labelledby="page-title">
+            ${pageHeading('Activity', 'A chronological record of changes and agent runs.', '<button data-action="refresh-activity" class="inline-flex h-9 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="rotate-cw" class="size-4"></i>Refresh</button>')}
+            <div class="mt-7 overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <div class="flex flex-col gap-3 border-b border-slate-100 p-4 lg:flex-row lg:items-center lg:justify-between lg:px-5"><p class="text-sm font-semibold text-slate-800"><span id="activity-result-count">${data.activity.length}</span> events</p><div class="grid grid-cols-1 gap-2 sm:grid-cols-3"><label class="relative"><span class="sr-only">Search activity</span><i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400"></i><input id="activity-search" type="search" placeholder="Search activity..." class="h-9 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-200"></label><label><span class="sr-only">Filter by event type</span><select id="activity-type-filter" class="h-9 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-700 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"><option value="All">All event types</option><option value="run">Agent runs</option><option value="change">Workspace changes</option></select></label><label><span class="sr-only">Filter by result</span><select id="activity-result-filter" class="h-9 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-700 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"><option value="All">All results</option><option value="Success">Success</option><option value="Failed">Failed</option></select></label></div></div>
+              <div class="overflow-x-auto"><table class="w-full min-w-[760px] border-collapse text-left"><thead><tr class="bg-slate-50 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500"><th class="px-5 py-3">Time</th><th class="px-4 py-3">Actor</th><th class="px-4 py-3">Action</th><th class="px-4 py-3">Resource</th><th class="px-4 py-3">Result</th><th class="w-10 px-3 py-3"><span class="sr-only">Details</span></th></tr></thead><tbody id="activity-table-body" class="divide-y divide-slate-100"></tbody></table></div>
+              <div id="activity-empty" class="hidden px-5 py-14 text-center"><span class="mx-auto flex size-10 items-center justify-center rounded-full bg-slate-100 text-slate-500"><i data-lucide="list-filter" class="size-5"></i></span><p class="mt-3 text-sm font-semibold text-slate-800">No activity found</p><p class="mt-1 text-xs text-slate-500">Adjust or clear your filters to see more events.</p><button data-action="clear-activity-filters" class="mt-4 text-xs font-semibold text-teal-700">Clear filters</button></div>
+            </div>
+          </section>`,
+
+        users: () => `
+          <section aria-labelledby="page-title">
+            ${pageHeading('Gestión de usuarios', 'Consulta los miembros, sus planes y el estado de sus cuentas.', `<span class="inline-flex h-8 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-600"><i data-lucide="users-round" class="size-3.5"></i>${userRecords.length} usuarios</span>`)}
+            <div class="mt-7 overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4 sm:px-6"><div><h2 class="text-sm font-semibold text-slate-900">Usuarios del espacio de trabajo</h2><p class="mt-1 text-xs text-slate-500">Registros de demostración</p></div><span class="text-xs text-slate-500">${userRecords.length} registros</span></div>
+              <div class="overflow-x-auto"><table class="w-full min-w-[720px] border-collapse text-left"><thead><tr class="bg-slate-50 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500"><th class="px-5 py-3">Usuario</th><th class="px-4 py-3">Plan</th><th class="px-4 py-3">Estado</th><th class="px-4 py-3">Fecha de alta</th><th class="w-12 px-4 py-3"><span class="sr-only">Acciones</span></th></tr></thead><tbody class="divide-y divide-slate-100">${userRecords.map(user => `<tr class="hover:bg-slate-50/70"><td class="px-5 py-3.5"><div class="flex min-w-56 items-center gap-3"><span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-teal-100 text-[10px] font-bold text-teal-800" aria-hidden="true">${escapeHtml(user.name.split(' ').map(part => part[0]).join(''))}</span><div class="min-w-0"><p class="truncate text-xs font-semibold text-slate-800">${escapeHtml(user.name)}</p><p class="mt-0.5 truncate text-[11px] text-slate-500">${escapeHtml(user.email)}</p></div></div></td><td class="px-4 py-3.5"><span class="text-xs font-medium text-slate-700">${escapeHtml(user.plan)}</span></td><td class="px-4 py-3.5">${userStatusBadge(user.status)}</td><td class="whitespace-nowrap px-4 py-3.5 text-xs text-slate-500">${escapeHtml(user.joined)}</td><td class="relative px-3 py-3.5"><button type="button" data-action="user-menu" data-id="${user.id}" aria-label="Acciones para ${escapeHtml(user.name)}" aria-haspopup="menu" aria-expanded="false" aria-controls="user-menu-${user.id}" class="flex size-8 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="ellipsis" class="size-4"></i></button><div id="user-menu-${user.id}" data-user-menu-for="${user.id}" role="menu" class="absolute right-8 top-10 z-10 hidden w-40 rounded-md border border-slate-200 bg-white py-1 shadow-lg"><button type="button" role="menuitem" data-action="user-detail" data-id="${user.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-slate-800"><i data-lucide="user-round" class="size-3.5"></i>Ver detalle</button><button type="button" role="menuitem" data-action="delete-user" data-id="${user.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-rose-700 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-rose-700"><i data-lucide="trash-2" class="size-3.5"></i>Eliminar</button></div></td></tr>`).join('')}</tbody></table></div>
+            </div>
+          </section>`,
+
+        contracts: () => `
+          <section aria-labelledby="page-title">
+            ${pageHeading('Contrataciones de agentes', 'Consulta contratos, servicios incluidos y pagos recibidos.', '<span class="inline-flex h-8 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-600"><i data-lucide="file-check-2" class="size-3.5"></i>5 contratos</span>')}
+            <div class="mt-7 overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <div class="border-b border-slate-100 px-5 py-4 sm:px-6"><h2 class="text-sm font-semibold text-slate-900">Contratos</h2><p class="mt-1 text-xs text-slate-500">Detalle de agentes y skills contratadas por cliente.</p></div>
+              <div class="overflow-x-auto"><table class="w-full min-w-[1080px] border-collapse text-left"><thead><tr class="bg-slate-50 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500"><th class="px-5 py-3">Contrato</th><th class="px-4 py-3">Cliente</th><th class="px-4 py-3">Agente</th><th class="px-4 py-3">Skills contratadas</th><th class="px-4 py-3">Inicio</th><th class="px-4 py-3">Fin</th><th class="px-4 py-3 text-right">Importe pagado</th><th class="w-12 px-4 py-3"><span class="sr-only">Acciones</span></th></tr></thead><tbody class="divide-y divide-slate-100">${agentContracts.map(contract => `<tr class="hover:bg-slate-50/70"><td class="whitespace-nowrap px-5 py-3.5 font-mono text-xs font-medium text-slate-700">${escapeHtml(contract.id)}</td><td class="whitespace-nowrap px-4 py-3.5 text-xs font-semibold text-slate-800">${escapeHtml(contract.client)}</td><td class="whitespace-nowrap px-4 py-3.5 text-xs text-slate-700">${escapeHtml(contract.agent)}</td><td class="max-w-64 px-4 py-3.5 text-xs text-slate-600">${escapeHtml(contract.skills.map(skill => skill.name).join(', '))}</td><td class="whitespace-nowrap px-4 py-3.5 text-xs text-slate-500">${escapeHtml(contract.startDate)}</td><td class="whitespace-nowrap px-4 py-3.5 text-xs text-slate-500">${escapeHtml(contract.endDate)}</td><td class="whitespace-nowrap px-4 py-3.5 text-right font-mono text-xs font-medium text-slate-800">${formatCurrency(contract.amountPaid)}</td><td class="relative px-3 py-3.5"><button type="button" data-action="contract-menu" data-id="${contract.id}" aria-label="Acciones para el contrato ${escapeHtml(contract.id)}" aria-haspopup="menu" aria-expanded="false" aria-controls="contract-menu-${contract.id}" class="flex size-8 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="ellipsis" class="size-4"></i></button><div id="contract-menu-${contract.id}" data-contract-menu-for="${contract.id}" role="menu" class="absolute right-8 top-10 z-10 hidden w-40 rounded-md border border-slate-200 bg-white py-1 shadow-lg"><button type="button" role="menuitem" data-action="contract-detail" data-id="${contract.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-slate-800"><i data-lucide="file-text" class="size-3.5"></i>Ver detalle</button></div></td></tr>`).join('')}</tbody></table></div>
+            </div>
+          </section>`,
+
+        errors: () => `
+          <section aria-labelledby="page-title">
+            ${pageHeading('Log de errores', 'Revisa errores de ejecución y registra cuándo quedan resueltos.', `<span class="inline-flex h-8 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-600"><i data-lucide="shield-alert" class="size-3.5"></i>${errorEntries.filter(entry => entry.status !== 'Resolved').length} abiertos</span>`)}
+            <div class="mt-7 overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <div class="border-b border-slate-100 px-5 py-4 sm:px-6"><h2 class="text-sm font-semibold text-slate-900">Errores recientes</h2><p class="mt-1 text-xs text-slate-500">${errorEntries.length} eventos de demostración · más recientes primero</p></div>
+              <div class="overflow-x-auto"><table class="w-full min-w-[940px] border-collapse text-left"><thead><tr class="bg-slate-50 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500"><th class="px-5 py-3">Timestamp</th><th class="px-4 py-3">Agente</th><th class="px-4 py-3">Tipo de error</th><th class="px-4 py-3">Descripción</th><th class="px-4 py-3">Estado</th><th class="w-12 px-4 py-3"><span class="sr-only">Acciones</span></th></tr></thead><tbody class="divide-y divide-slate-100">${errorEntries.map(entry => `<tr class="hover:bg-slate-50/70"><td class="whitespace-nowrap px-5 py-3.5 font-mono text-[11px] text-slate-500">${escapeHtml(entry.timestamp)}</td><td class="whitespace-nowrap px-4 py-3.5 text-xs font-semibold text-slate-800">${escapeHtml(entry.agent)}</td><td class="px-4 py-3.5">${errorTypeBadge(entry.type, entry.code)}</td><td class="max-w-[340px] px-4 py-3.5 text-xs text-slate-600">${escapeHtml(entry.description)}</td><td class="px-4 py-3.5">${errorResolutionBadge(entry)}</td><td class="relative px-3 py-3.5"><button type="button" data-action="error-menu" data-id="${entry.id}" aria-label="Acciones para el error ${escapeHtml(entry.id)}" aria-haspopup="menu" aria-expanded="false" aria-controls="error-menu-${entry.id}" class="flex size-8 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="ellipsis" class="size-4"></i></button><div id="error-menu-${entry.id}" data-error-menu-for="${entry.id}" role="menu" class="absolute right-8 top-10 z-10 hidden w-48 rounded-md border border-slate-200 bg-white py-1 shadow-lg"><button type="button" role="menuitem" data-action="error-detail" data-id="${entry.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-slate-800"><i data-lucide="file-search" class="size-3.5"></i>Ver detalle</button><button type="button" role="menuitem" data-action="resolve-error" data-id="${entry.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-slate-800"><i data-lucide="check-check" class="size-3.5"></i>${entry.status === 'Resolved' ? 'Resuelto' : 'Marcar como resuelto'}</button></div></td></tr>`).join('')}</tbody></table></div>
+            </div>
+          </section>`,
+
+        settings: () => `
+          <section aria-labelledby="page-title">
+            ${pageHeading('Settings', 'Manage your workspace profile and preferences.', '')}
+            <form id="settings-form" class="mt-7 space-y-5">
+              <section class="rounded-lg border border-slate-200 bg-white" aria-labelledby="profile-title"><div class="border-b border-slate-100 px-5 py-4 sm:px-6"><h2 id="profile-title" class="text-sm font-semibold text-slate-900">Workspace profile</h2><p class="mt-1 text-xs text-slate-500">Workspace details visible to your team.</p></div><div class="grid grid-cols-1 gap-4 px-5 py-5 sm:grid-cols-2 sm:px-6"><label class="block"><span class="text-xs font-semibold text-slate-700">Workspace name</span><input name="workspace" required maxlength="60" value="${escapeHtml(data.settings.workspace)}" class="mt-1.5 h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"></label><label class="block"><span class="text-xs font-semibold text-slate-700">Administrator name</span><input name="admin" required maxlength="60" value="${escapeHtml(data.settings.admin)}" class="mt-1.5 h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"></label></div><div class="flex justify-end border-t border-slate-100 px-5 py-3 sm:px-6"><button class="h-9 rounded-md bg-slate-950 px-3.5 text-sm font-semibold text-white hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800" type="submit">Save profile</button></div></section>
+              <section class="rounded-lg border border-slate-200 bg-white" aria-labelledby="preferences-title"><div class="border-b border-slate-100 px-5 py-4 sm:px-6"><h2 id="preferences-title" class="text-sm font-semibold text-slate-900">Preferences</h2><p class="mt-1 text-xs text-slate-500">Choose what you want to hear about.</p></div><div class="divide-y divide-slate-100 px-5 sm:px-6"><label class="flex min-h-[68px] cursor-pointer items-center justify-between gap-4"><span><span class="block text-sm font-medium text-slate-800">Failed agent runs</span><span class="mt-0.5 block text-xs text-slate-500">Get notified when an agent run needs attention.</span></span><input name="failedRuns" type="checkbox" ${data.settings.failedRuns ? 'checked' : ''} class="size-4 shrink-0 accent-teal-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"></label><label class="flex min-h-[68px] cursor-pointer items-center justify-between gap-4"><span><span class="block text-sm font-medium text-slate-800">Weekly summary</span><span class="mt-0.5 block text-xs text-slate-500">Receive a summary of agent activity every Monday.</span></span><input name="weeklySummary" type="checkbox" ${data.settings.weeklySummary ? 'checked' : ''} class="size-4 shrink-0 accent-teal-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"></label></div></section>
+              <section class="rounded-lg border border-slate-200 bg-white" aria-labelledby="appearance-title"><div class="border-b border-slate-100 px-5 py-4 sm:px-6"><h2 id="appearance-title" class="text-sm font-semibold text-slate-900">Appearance</h2><p class="mt-1 text-xs text-slate-500">Adjust the look of your workspace.</p></div><label class="flex min-h-[68px] cursor-pointer items-center justify-between gap-4 px-5 sm:px-6"><span><span class="block text-sm font-medium text-slate-800">Dark mode</span><span class="mt-0.5 block text-xs text-slate-500">Use a darker color theme across the workspace.</span></span><input id="settings-dark-mode" name="darkMode" type="checkbox" ${data.settings.darkMode ? 'checked' : ''} class="size-4 shrink-0 accent-teal-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"></label></section>
+              <section class="flex flex-col gap-3 rounded-lg border border-rose-200 bg-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"><div><h2 class="text-sm font-semibold text-slate-900">Reset demo data</h2><p class="mt-1 text-xs text-slate-500">Restore the original sample agents, activity, and preferences.</p></div><button type="button" data-action="reset-demo" class="inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-md border border-rose-200 px-3 text-sm font-semibold text-rose-700 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700"><i data-lucide="rotate-ccw" class="size-4"></i>Reset data</button></section>
+            </form>
+          </section>`
+      };
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+      }
+
+      function metricCard(label, value, note, icon, iconColor, trend) {
+        return `<article class="rounded-lg border border-slate-200 bg-white px-4 py-4 sm:px-5"><div class="flex items-center justify-between"><span class="flex size-9 items-center justify-center rounded-md ${iconColor}"><i data-lucide="${icon}" class="size-[18px]"></i></span><span class="rounded-sm bg-slate-50 px-2 py-1 text-[10px] font-semibold text-slate-600">${trend}</span></div><p class="mt-4 text-xs font-medium text-slate-500">${label}</p><div class="mt-1 flex items-end justify-between gap-2"><p class="font-mono text-[25px] font-medium tracking-tight text-slate-950">${value}</p><p class="pb-1 text-[10px] text-slate-400">${note}</p></div></article>`;
+      }
+
+      function chartBar(day, value, height, emphasized) {
+        return `<div class="flex h-full flex-col items-center justify-end gap-2"><span class="font-mono text-[9px] text-slate-400 sm:text-[10px]">${value}</span><div class="${height} w-full max-w-12 rounded-t-sm ${emphasized ? 'bg-teal-700' : 'bg-teal-200'}" role="img" aria-label="${day}: ${value} runs"></div><span class="pb-2 text-[10px] text-slate-500">${day}</span></div>`;
+      }
+
+      function recentAgent(name, detail, time, status, initials, avatarClass) {
+        return `<li class="flex items-center gap-3 py-4"><span class="flex size-9 shrink-0 items-center justify-center rounded-md ${avatarClass} text-[10px] font-bold">${initials}</span><div class="min-w-0 flex-1"><p class="truncate text-xs font-semibold text-slate-800">${name}</p><p class="mt-0.5 truncate text-[11px] text-slate-500">${detail}</p></div><div class="shrink-0 text-right"><span class="inline-flex items-center gap-1 text-[10px] font-medium text-emerald-700"><span class="size-1.5 rounded-full bg-emerald-500"></span>${status}</span><p class="mt-1 text-[10px] text-slate-400">${time}</p></div></li>`;
+      }
+
+      function pageHeading(title, description, action) {
+        return `<div class="flex flex-wrap items-end justify-between gap-4"><div><h1 id="page-title" class="text-[26px] font-semibold tracking-tight text-slate-950">${title}</h1><p class="mt-1 text-sm text-slate-500">${description}</p></div>${action || ''}</div>`;
+      }
+
+      function activeAgentsCount() {
+        return data.agents.filter(agent => agent.status === 'Active').length;
+      }
+
+      function persistData() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        updateSidebarProfile();
+      }
+
+      function updateSidebarProfile() {
+        document.getElementById('sidebar-admin-name').textContent = data.settings.admin;
+        document.getElementById('agent-nav-count').textContent = String(data.agents.length);
+      }
+
+      function navigate(view, updateHash = true) {
+        if (!templates[view]) view = 'dashboard';
+        currentView = view;
+        if (updateHash && location.hash !== `#${view}`) history.pushState(null, '', `#${view}`);
+        document.querySelectorAll('[data-nav]').forEach(link => {
+          const active = link.dataset.nav === view;
+          const activeBackground = data.settings.darkMode ? 'bg-slate-700' : 'bg-slate-100';
+          const activeText = data.settings.darkMode ? 'text-slate-50' : 'text-slate-950';
+          const inactiveText = data.settings.darkMode ? 'text-slate-400' : 'text-slate-600';
+          if (link.tagName === 'A') {
+            if (active) link.setAttribute('aria-current', 'page');
+            else link.removeAttribute('aria-current');
+            link.classList.toggle('border-slate-950', active);
+            link.classList.remove('bg-slate-100', 'bg-slate-700', 'text-slate-950', 'text-slate-50', 'text-slate-600', 'text-slate-400');
+            if (active) link.classList.add(activeBackground, activeText);
+            else link.classList.add(inactiveText);
+            link.classList.toggle('font-semibold', active);
+            link.classList.toggle('border-transparent', !active);
+            link.classList.toggle('font-medium', !active);
+          }
+        });
+        const title = navTitles[view];
+        document.getElementById('breadcrumb').textContent = title;
+        document.getElementById('mobile-breadcrumb').textContent = title;
+        viewRoot.innerHTML = templates[view]();
+        if (view === 'skills') {
+          document.getElementById('skill-total-count').textContent = `${skillGroups.reduce((total, group) => total + group.skills.length, 0)} skills`;
+          const catalog = document.querySelector('[aria-label="Skills catalog"]');
+          catalog.classList.remove('overflow-hidden');
+          const detail = document.getElementById('skill-detail');
+          const explanation = document.createElement('p');
+          explanation.className = 'mx-5 mt-4 rounded-md bg-blue-50 px-3 py-2 text-xs leading-5 text-slate-600';
+          explanation.textContent = 'In AgentHub, a skill is a reusable capability an agent can use to perform a specific task. Assign skills to control which tools and behaviors are available to each agent.';
+          detail.before(explanation);
+        }
+        viewRoot.focus({ preventScroll: true });
+        renderViewData();
+        applyTheme();
+        refreshIcons();
+        closeMobileNav();
+      }
+
+      function refreshIcons() {
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      const themePairs = [
+        ['bg-[#f4f6f5]', 'bg-zinc-950'], ['bg-white', 'bg-slate-900'], ['bg-slate-50', 'bg-slate-800'], ['bg-slate-100', 'bg-slate-700'], ['bg-slate-200', 'bg-slate-600'],
+        ['bg-white/95', 'bg-slate-900/95'], ['bg-slate-50/60', 'bg-slate-800/60'], ['bg-slate-50/70', 'bg-slate-800/70'], ['bg-teal-200', 'bg-teal-800'],
+        ['text-slate-950', 'text-slate-50'], ['text-slate-900', 'text-slate-100'], ['text-slate-800', 'text-slate-200'], ['text-slate-700', 'text-slate-300'], ['text-slate-600', 'text-slate-400'], ['text-slate-500', 'text-slate-400'], ['text-slate-400', 'text-slate-300'],
+        ['border-slate-200', 'border-slate-700'], ['border-slate-100', 'border-slate-800'], ['divide-slate-100', 'divide-slate-800'],
+        ['border-rose-200', 'border-rose-900'], ['hover:bg-slate-50', 'hover:bg-slate-800'], ['hover:bg-slate-100', 'hover:bg-slate-700'], ['hover:bg-slate-50/70', 'hover:bg-slate-800/70'], ['hover:text-slate-950', 'hover:text-white'], ['hover:text-slate-700', 'hover:text-slate-200'],
+        ['bg-blue-50', 'bg-blue-950'], ['text-blue-700', 'text-blue-300'], ['bg-emerald-50', 'bg-emerald-950'], ['text-emerald-700', 'text-emerald-300'], ['bg-amber-50', 'bg-amber-950'], ['text-amber-700', 'text-amber-300'], ['bg-rose-50', 'bg-rose-950'], ['text-rose-700', 'text-rose-300'], ['bg-teal-50', 'bg-teal-950'], ['text-teal-700', 'text-teal-300'],
+        ['bg-teal-100', 'bg-teal-900'], ['text-teal-800', 'text-teal-200'], ['bg-blue-100', 'bg-blue-900'], ['text-blue-800', 'text-blue-200'], ['bg-amber-100', 'bg-amber-900'], ['text-amber-800', 'text-amber-200'],
+        ['bg-emerald-100', 'bg-emerald-900'], ['text-emerald-800', 'text-emerald-200'], ['bg-rose-100', 'bg-rose-900'], ['text-rose-800', 'text-rose-200'], ['bg-violet-50', 'bg-violet-950'], ['text-violet-700', 'text-violet-300'], ['bg-violet-100', 'bg-violet-950'], ['text-violet-800', 'text-violet-200'], ['bg-orange-50', 'bg-orange-950'], ['text-orange-700', 'text-orange-300'], ['bg-orange-100', 'bg-orange-900'], ['text-orange-800', 'text-orange-200'], ['placeholder:text-slate-400', 'placeholder:text-slate-500']
+      ];
+
+      function applyTheme() {
+        const dark = data.settings.darkMode;
+        document.documentElement.classList.toggle('dark', dark);
+        document.querySelectorAll('[class]:not([data-theme-ready])').forEach(element => {
+          const classes = new Set(element.classList);
+          themePairs.forEach(([lightClass, darkClass]) => {
+            if (classes.has(lightClass)) element.classList.add(`dark:${darkClass}`);
+          });
+          element.dataset.themeReady = 'true';
+        });
+        const toggle = document.getElementById('theme-toggle');
+        if (toggle) {
+          toggle.setAttribute('aria-pressed', String(dark));
+          document.getElementById('theme-label').textContent = dark ? 'Light mode' : 'Dark mode';
+          toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+          toggle.setAttribute('title', dark ? 'Switch to light mode' : 'Switch to dark mode');
+          toggle.querySelector('[data-lucide]')?.setAttribute('data-lucide', dark ? 'sun' : 'moon');
+        }
+        const settingsToggle = document.getElementById('settings-dark-mode');
+        if (settingsToggle) settingsToggle.checked = dark;
+      }
+
+      function renderViewData() {
+        if (currentView === 'agents') renderAgents();
+        if (currentView === 'integrations') renderIntegrations();
+        if (currentView === 'activity') renderActivity();
+        if (currentView === 'settings') document.getElementById('settings-dark-mode')?.addEventListener('change', event => {
+          data.settings.darkMode = event.target.checked;
+          persistData();
+          applyTheme();
+          refreshIcons();
+        });
+      }
+
+      function renderAgents() {
+        const body = document.getElementById('agent-table-body');
+        if (!body) return;
+        const query = (document.getElementById('agent-search')?.value || '').trim().toLowerCase();
+        const status = document.getElementById('agent-status-filter')?.value || 'All';
+        const agents = data.agents.filter(agent => `${agent.name} ${agent.description}`.toLowerCase().includes(query) && (status === 'All' || agent.status === status));
+        document.getElementById('agent-result-count').textContent = String(agents.length);
+        document.getElementById('agent-empty').classList.toggle('hidden', agents.length > 0);
+        body.innerHTML = agents.map(agent => `<tr class="hover:bg-slate-50/70"><td class="px-5 py-3.5"><div class="flex min-w-56 items-center gap-3"><span class="flex size-8 shrink-0 items-center justify-center rounded-md bg-slate-100 text-[10px] font-bold text-slate-600">${escapeHtml(agent.name.split(' ').map(word => word[0]).slice(0, 2).join(''))}</span><div class="min-w-0"><p class="truncate text-xs font-semibold text-slate-800">${escapeHtml(agent.name)}</p><p class="mt-0.5 truncate text-[11px] text-slate-500">${escapeHtml(agent.description)}</p></div></div></td><td class="px-4 py-3.5">${statusBadge(agent.status)}</td><td class="max-w-64 px-4 py-3.5"><div class="flex flex-wrap gap-1">${agent.skills.slice(0, 2).map(skill => `<span class="rounded-sm bg-slate-100 px-1.5 py-1 text-[10px] font-medium text-slate-600">${escapeHtml(skill)}</span>`).join('')}</div></td><td class="whitespace-nowrap px-4 py-3.5 text-xs text-slate-500">${escapeHtml(agent.lastRun)}</td><td class="relative px-3 py-3.5"><button data-action="agent-menu" data-id="${agent.id}" aria-label="Actions for ${escapeHtml(agent.name)}" aria-expanded="false" class="flex size-8 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="ellipsis" class="size-4"></i></button><div data-menu-for="${agent.id}" class="absolute right-8 top-10 z-10 hidden w-40 rounded-md border border-slate-200 bg-white py-1 shadow-lg"><button data-action="edit-agent" data-id="${agent.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"><i data-lucide="pencil" class="size-3.5"></i>Edit</button><button data-action="toggle-agent" data-id="${agent.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"><i data-lucide="${agent.status === 'Active' ? 'pause' : 'play'}" class="size-3.5"></i>${agent.status === 'Active' ? 'Pause' : 'Activate'}</button><button data-action="delete-agent" data-id="${agent.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-rose-700 hover:bg-rose-50"><i data-lucide="trash-2" class="size-3.5"></i>Delete</button></div></td></tr>`).join('');
+        decorateAgentRows(agents);
+        applyTheme();
+        refreshIcons();
+      }
+
+      function decorateAgentRows(agents) {
+        document.querySelectorAll('#agent-table-body tr').forEach((row, index) => {
+          const agent = agents[index];
+          const cells = row.querySelectorAll('td');
+          const ownerCell = document.createElement('td');
+          ownerCell.className = 'whitespace-nowrap px-4 py-3.5 text-xs text-slate-600';
+          ownerCell.textContent = agent.owner;
+          cells[0].after(ownerCell);
+
+          const skillsId = `agent-skills-${agent.id}`;
+          cells[2].className = 'max-w-64 px-4 py-3.5';
+          cells[2].innerHTML = `<button type="button" data-action="toggle-agent-skills" data-id="${agent.id}" aria-expanded="false" aria-controls="${skillsId}" class="inline-flex min-h-8 items-center gap-2 rounded-md px-2 text-left text-xs font-medium text-slate-600 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="chevron-down" class="size-3.5 transition-transform duration-300"></i><span>${agent.skills.length} ${agent.skills.length === 1 ? 'skill' : 'skills'}</span></button><div id="${skillsId}" role="region" aria-label="${escapeHtml(agent.name)} skills" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out"><ul class="flex min-h-0 flex-wrap gap-1 overflow-hidden">${agent.skills.map(skill => `<li class="rounded-sm bg-slate-100 px-1.5 py-1 text-[10px] font-medium text-slate-600">${escapeHtml(skill)}</li>`).join('')}</ul></div>`;
+
+          const menu = row.querySelector(`[data-menu-for="${agent.id}"]`);
+          const menuButton = row.querySelector('[data-action="agent-menu"]');
+          menuButton.setAttribute('aria-haspopup', 'menu');
+          menu.setAttribute('role', 'menu');
+          menu.innerHTML = `<button type="button" role="menuitem" data-action="configure-agent" data-id="${agent.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-slate-800"><i data-lucide="settings-2" class="size-3.5"></i>Configurar</button><button type="button" role="menuitem" data-action="delete-agent" data-id="${agent.id}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-rose-700 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-rose-700"><i data-lucide="trash-2" class="size-3.5"></i>Eliminar</button>`;
+        });
+      }
+
+      function statusBadge(status) {
+        const positive = ['Active', 'Connected', 'Success'].includes(status);
+        const failed = status === 'Failed';
+        const color = positive ? 'bg-emerald-50 text-emerald-700' : failed ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-600';
+        const dotColor = positive ? 'bg-emerald-500' : failed ? 'bg-rose-500' : 'bg-slate-400';
+        return `<span class="inline-flex items-center gap-1.5 rounded-sm px-2 py-1 text-[10px] font-semibold ${color}"><span class="size-1.5 rounded-full ${dotColor}"></span>${status}</span>`;
+      }
+
+      function userStatusBadge(status) {
+        const styles = {
+          Activo: 'bg-emerald-50 text-emerald-700',
+          Pendiente: 'bg-amber-50 text-amber-800',
+          Suspendido: 'bg-rose-50 text-rose-700'
+        };
+        const dots = { Activo: 'bg-emerald-500', Pendiente: 'bg-amber-500', Suspendido: 'bg-rose-500' };
+        return `<span class="inline-flex items-center gap-1.5 rounded-sm px-2 py-1 text-[10px] font-semibold ${styles[status] || 'bg-slate-100 text-slate-600'}"><span class="size-1.5 rounded-full ${dots[status] || 'bg-slate-400'}"></span>${escapeHtml(status)}</span>`;
+      }
+
+      function errorTypeBadge(type, code) {
+        const palettes = {
+          Timeout: 'bg-rose-50 text-rose-700',
+          'Rate limit': 'bg-amber-50 text-amber-800',
+          'Tool error': 'bg-violet-50 text-violet-700',
+          Validation: 'bg-blue-50 text-blue-700',
+          Authentication: 'bg-orange-50 text-orange-800',
+          'Context limit': 'bg-slate-100 text-slate-700'
+        };
+        return `<span class="inline-flex items-center gap-1.5 rounded-sm px-2 py-1 text-[10px] font-semibold ${palettes[type] || 'bg-slate-100 text-slate-700'}"><span class="size-1.5 rounded-full bg-current"></span>${escapeHtml(type)}<span class="ml-1 font-mono text-[9px] font-medium opacity-75">${escapeHtml(code)}</span></span>`;
+      }
+
+      function errorResolutionBadge(entry) {
+        const resolved = entry.status === 'Resolved';
+        return `<span class="inline-flex items-center gap-1.5 rounded-sm px-2 py-1 text-[10px] font-semibold ${resolved ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}"><span class="size-1.5 rounded-full ${resolved ? 'bg-emerald-500' : 'bg-rose-500'}"></span>${resolved ? 'Resuelto' : 'Abierto'}</span>`;
+      }
+
+      function skillRow(skill) {
+        const userCount = data.agents.filter(agent => agent.skills.includes(skill.name)).length;
+        const menuId = `skill-menu-${skill.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+        return `<div class="flex items-center gap-2 px-3 py-2"><button type="button" data-action="select-skill" data-skill="${escapeHtml(skill.name)}" class="flex min-w-0 flex-1 items-center gap-3 rounded-md px-2 py-1.5 text-left hover:bg-white focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-slate-800"><span class="flex size-8 shrink-0 items-center justify-center rounded-md bg-white text-slate-500"><i data-lucide="sparkles" class="size-4"></i></span><span class="min-w-0 flex-1"><span class="block text-xs font-semibold text-slate-800">${escapeHtml(skill.name)}</span><span class="mt-0.5 block truncate text-[11px] text-slate-500">${escapeHtml(skill.description)}</span></span><span class="shrink-0 text-[10px] text-slate-400">${userCount} ${userCount === 1 ? 'agent' : 'agents'}</span></button><div class="relative shrink-0"><button type="button" data-action="skill-menu" data-skill="${escapeHtml(skill.name)}" aria-label="Actions for ${escapeHtml(skill.name)}" aria-haspopup="menu" aria-expanded="false" aria-controls="${menuId}" class="flex size-8 items-center justify-center rounded-md text-slate-400 hover:bg-white hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="ellipsis" class="size-4"></i></button><div id="${menuId}" data-skill-menu-for="${escapeHtml(skill.name)}" role="menu" class="absolute right-0 top-9 z-20 hidden w-40 rounded-md border border-slate-200 bg-white py-1 shadow-lg"><button type="button" role="menuitem" data-action="skill-detail" data-skill="${escapeHtml(skill.name)}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-slate-800"><i data-lucide="eye" class="size-3.5"></i>Ver detalle</button><button type="button" role="menuitem" data-action="delete-skill" data-skill="${escapeHtml(skill.name)}" class="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-rose-700 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-rose-700"><i data-lucide="trash-2" class="size-3.5"></i>Eliminar</button></div></div></div>`;
+      }
+
+      function selectSkill(skillName) {
+        const skill = skillGroups.flatMap(group => group.skills).find(item => item.name === skillName);
+        if (!skill) return;
+        const agentOptions = data.agents.map(agent => `<label class="flex items-center gap-2 text-xs text-slate-700"><input type="checkbox" name="agentIds" value="${agent.id}" ${agent.skills.includes(skill.name) ? 'checked' : ''} class="size-3.5 accent-teal-700">${escapeHtml(agent.name)}</label>`).join('');
+        document.getElementById('skill-detail').innerHTML = `<div class="flex items-start justify-between gap-3"><div class="flex size-10 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700"><i data-lucide="sparkles" class="size-5"></i></div><span class="rounded-sm bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-700">Available</span></div><h3 class="mt-4 text-sm font-semibold text-slate-900">${escapeHtml(skill.name)}</h3><p class="mt-1 text-xs leading-5 text-slate-500">${escapeHtml(skill.description)}</p><form id="skill-assignment-form" data-skill="${escapeHtml(skill.name)}" class="mt-5 border-t border-slate-100 pt-4"><fieldset><legend class="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500">Assign to agents</legend><div class="space-y-3">${agentOptions}</div></fieldset><button class="mt-4 h-9 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800" type="submit">Save assignments</button></form>`;
+        refreshIcons();
+        applyTheme();
+      }
+
+      function renderIntegrations() {
+        const filter = document.getElementById('integration-filter')?.value || 'All';
+        const integrations = data.integrations.filter(item => filter === 'All' || (filter === 'Connected' ? item.connected : !item.connected));
+        document.getElementById('integration-connected-count').textContent = `${data.integrations.filter(item => item.connected).length} connected`;
+        document.getElementById('integration-empty').classList.toggle('hidden', integrations.length > 0);
+        document.getElementById('integration-list').innerHTML = integrations.map(item => `<article class="flex flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:px-6"><span class="flex size-11 shrink-0 items-center justify-center rounded-md ${item.color} text-sm font-bold">${escapeHtml(item.initials)}</span><div class="min-w-0 flex-1"><div class="flex flex-wrap items-center gap-2"><h3 class="text-sm font-semibold text-slate-900">${escapeHtml(item.displayName || item.name)}</h3>${statusBadge(item.connected ? 'Connected' : 'Not connected')}</div><p class="mt-1 text-xs text-slate-500">${escapeHtml(item.description)}</p></div><div class="flex shrink-0 items-center gap-2"><button data-action="configure-integration" data-id="${item.id}" class="h-9 rounded-md border border-slate-200 px-3 text-xs font-medium text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800">Configure</button><button data-action="toggle-integration" data-id="${item.id}" class="h-9 min-w-24 rounded-md ${item.connected ? 'border border-slate-200 bg-white text-slate-700 hover:bg-slate-50' : 'bg-slate-950 text-white hover:bg-slate-800'} px-3 text-xs font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800">${item.connected ? 'Disconnect' : 'Connect'}</button></div></article>`).join('');
+        applyTheme();
+        refreshIcons();
+      }
+
+      function renderActivity() {
+        const query = (document.getElementById('activity-search')?.value || '').trim().toLowerCase();
+        const type = document.getElementById('activity-type-filter')?.value || 'All';
+        const result = document.getElementById('activity-result-filter')?.value || 'All';
+        const events = [...data.activity].sort((a, b) => new Date(b.date) - new Date(a.date)).filter(event => {
+          const matchesQuery = `${event.actor} ${event.action} ${event.resource} ${event.detail}`.toLowerCase().includes(query);
+          const isRun = /run/i.test(event.action);
+          return matchesQuery && (type === 'All' || (type === 'run' ? isRun : !isRun)) && (result === 'All' || event.result === result);
+        });
+        document.getElementById('activity-result-count').textContent = String(events.length);
+        document.getElementById('activity-empty').classList.toggle('hidden', events.length > 0);
+        document.getElementById('activity-table-body').innerHTML = events.map(event => `<tr class="hover:bg-slate-50/70"><td class="whitespace-nowrap px-5 py-3.5 text-xs text-slate-500">${formatDate(event.date)}</td><td class="max-w-40 truncate px-4 py-3.5 text-xs font-medium text-slate-800">${escapeHtml(event.actor)}</td><td class="whitespace-nowrap px-4 py-3.5 text-xs text-slate-700">${escapeHtml(event.action)}</td><td class="max-w-56 truncate px-4 py-3.5 text-xs text-slate-500">${escapeHtml(event.resource)}</td><td class="px-4 py-3.5">${statusBadge(event.result)}</td><td class="px-3 py-3.5"><button data-action="event-detail" data-id="${event.id}" aria-label="View event details" class="flex size-8 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800"><i data-lucide="arrow-up-right" class="size-4"></i></button></td></tr>`).join('');
+        applyTheme();
+        refreshIcons();
+      }
+
+      function formatDate(value) {
+        return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(value));
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-message').textContent = message;
+        toast.classList.remove('hidden');
+        toast.classList.add('flex');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.add('hidden');
+          toast.classList.remove('flex');
+        }, 2800);
+      }
+
+      function openDialog({ kind, title, description, content, submitLabel = 'Save changes', danger = false, confirmText = '' }) {
+        modalAction = { kind, ...confirmText && { confirmText } };
+        lastFocusedElement = document.activeElement;
+        document.getElementById('dialog-title').textContent = title;
+        document.getElementById('dialog-description').textContent = description || '';
+        document.getElementById('dialog-content').innerHTML = content || '';
+        document.getElementById('dialog-error').classList.add('hidden');
+        const submitButton = document.getElementById('dialog-submit');
+        submitButton.textContent = submitLabel;
+        submitButton.className = `h-9 rounded-md px-3.5 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 ${danger ? 'bg-rose-700 hover:bg-rose-800 focus-visible:outline-rose-700' : 'bg-slate-950 hover:bg-slate-800 focus-visible:outline-slate-800'}`;
+        dialog.showModal();
+        refreshIcons();
+        applyTheme();
+        requestAnimationFrame(() => dialog.querySelector('input, button:not([data-close-dialog]), select, textarea')?.focus());
+      }
+
+      function openAgentDialog(agent = null) {
+        const editing = Boolean(agent);
+        openDialog({ kind: editing ? 'edit-agent' : 'new-agent', title: editing ? 'Edit agent' : 'New agent', description: 'Agent changes are saved to this browser only.', submitLabel: editing ? 'Save changes' : 'Create agent', content: `
+          <div class="space-y-4"><label class="block"><span class="text-xs font-semibold text-slate-700">Name <span class="text-rose-600">*</span></span><input name="name" required maxlength="60" value="${escapeHtml(agent?.name || '')}" class="mt-1.5 h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200" placeholder="e.g. Support Concierge"></label><label class="block"><span class="text-xs font-semibold text-slate-700">Owner</span><input name="owner" maxlength="60" value="${escapeHtml(agent?.owner || data.settings.admin)}" class="mt-1.5 h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"></label><label class="block"><span class="text-xs font-semibold text-slate-700">Description</span><textarea name="description" rows="3" maxlength="160" class="mt-1.5 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200" placeholder="What does this agent do?">${escapeHtml(agent?.description || '')}</textarea></label><label class="block"><span class="text-xs font-semibold text-slate-700">Status</span><select name="status" class="mt-1.5 h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"><option ${agent?.status !== 'Paused' ? 'selected' : ''}>Active</option><option ${agent?.status === 'Paused' ? 'selected' : ''}>Paused</option></select></label></div>` });
+        if (editing) modalAction.id = agent.id;
+      }
+
+      function openAgentConfigDialog(agent) {
+        openDialog({ kind: 'configure-agent', title: `Configurar ${agent.name}`, description: 'Edita el prompt de sistema que define el comportamiento de este agente.', submitLabel: 'Guardar prompt', content: `<label class="block"><span class="text-xs font-semibold text-slate-700">Prompt de sistema</span><textarea name="systemPrompt" rows="12" spellcheck="true" class="mt-1.5 w-full resize-y rounded-md border border-slate-200 bg-white px-3 py-2.5 font-mono text-xs leading-5 text-slate-800 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200">${escapeHtml(agent.systemPrompt)}</textarea></label>` });
+        modalAction.id = agent.id;
+      }
+
+      function openConfirm(kind, title, description, confirmText, danger = true) {
+        openDialog({ kind, title, description, submitLabel: confirmText, confirmText, danger, content: `<div class="flex items-start gap-3"><span class="flex size-9 shrink-0 items-center justify-center rounded-md ${danger ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-600'}"><i data-lucide="${danger ? 'triangle-alert' : 'rotate-ccw'}" class="size-4"></i></span><p class="pt-1 text-sm leading-5 text-slate-600">${description}</p></div>` });
+      }
+
+      function closeDialog() {
+        if (dialog.open) dialog.close();
+      }
+
+      function closeMobileNav() {
+        document.getElementById('sidebar').classList.add('-translate-x-full');
+        document.getElementById('mobile-overlay').classList.add('hidden');
+        document.getElementById('mobile-open').setAttribute('aria-expanded', 'false');
+      }
+
+      function openMobileNav() {
+        document.getElementById('sidebar').classList.remove('-translate-x-full');
+        document.getElementById('mobile-overlay').classList.remove('hidden');
+        document.getElementById('mobile-open').setAttribute('aria-expanded', 'true');
+        document.getElementById('mobile-close').focus();
+      }
+
+      function formatCurrency(value) {
+        return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+      }
+
+      function openContractDetail(contract) {
+        const skillTotal = contract.skills.reduce((total, skill) => total + skill.price, 0);
+        const skillRows = contract.skills.map(skill => `<tr class="border-b border-slate-100 last:border-0"><td class="py-3 pr-3 text-sm font-medium text-slate-800">${escapeHtml(skill.name)}</td><td class="py-3 text-right font-mono text-xs text-slate-700">${formatCurrency(skill.price)}</td></tr>`).join('');
+        const field = (label, value) => `<div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">${label}</dt><dd class="mt-1 text-sm text-slate-800">${value}</dd></div>`;
+        openDialog({ kind: 'contract-detail', title: `Contrato ${escapeHtml(contract.id)}`, description: 'Desglose completo del servicio contratado y el pago.', submitLabel: 'Cerrar', content: `<dl class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">${field('Cliente', escapeHtml(contract.client))}${field('Agente', escapeHtml(contract.agent))}${field('Fecha de inicio', escapeHtml(contract.startDate))}${field('Fecha de fin', escapeHtml(contract.endDate))}${field('Estado del pago', escapeHtml(contract.paymentStatus))}${field('Fecha de pago', escapeHtml(contract.paymentDate))}<div class="sm:col-span-2">${field('Método de pago', escapeHtml(contract.paymentMethod))}</div></dl><section class="mt-5 border-t border-slate-100 pt-4"><h3 class="text-xs font-semibold text-slate-800">Skills contratadas</h3><div class="mt-2"><table class="w-full"><thead><tr class="text-left text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400"><th class="py-2 pr-3">Skill</th><th class="py-2 text-right">Precio individual</th></tr></thead><tbody>${skillRows}</tbody><tfoot><tr class="border-t border-slate-200"><th class="pt-3 text-left text-xs font-semibold text-slate-700">Total pagado</th><td class="pt-3 text-right font-mono text-sm font-semibold text-slate-950">${formatCurrency(skillTotal)}</td></tr></tfoot></table></div></section>` });
+      }
+
+      function openErrorDetail(entry) {
+        openDialog({ kind: 'error-detail', title: `Detalle del error · ${escapeHtml(entry.id)}`, description: `${escapeHtml(entry.timestamp)} · ${escapeHtml(entry.agent)}`, submitLabel: 'Cerrar', content: `<dl class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2"><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Agente</dt><dd class="mt-1 text-sm font-medium text-slate-800">${escapeHtml(entry.agent)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Timestamp</dt><dd class="mt-1 font-mono text-xs text-slate-700">${escapeHtml(entry.timestamp)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Tipo y código</dt><dd class="mt-1">${errorTypeBadge(entry.type, entry.code)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Estado</dt><dd class="mt-1">${errorResolutionBadge(entry)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Descripción</dt><dd class="mt-1 text-sm leading-5 text-slate-700">${escapeHtml(entry.description)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Mensaje técnico</dt><dd class="mt-1 overflow-x-auto rounded-md bg-slate-50 p-3 font-mono text-xs leading-5 text-slate-700">${escapeHtml(entry.message)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Contexto</dt><dd class="mt-1 text-sm leading-5 text-slate-600">${escapeHtml(entry.details)}</dd></div>${entry.resolvedAt ? `<div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Resuelto el</dt><dd class="mt-1 text-sm text-slate-700">${escapeHtml(entry.resolvedAt)}</dd></div>` : ''}</dl>` });
+      }
+
+      document.addEventListener('click', event => {
+        const insideMenu = event.target.closest('[role="menu"]');
+        const menuTrigger = event.target.closest('[data-action="agent-menu"], [data-action="user-menu"], [data-action="skill-menu"], [data-action="contract-menu"], [data-action="error-menu"]');
+        if (!insideMenu && !menuTrigger) closeActionMenus();
+
+        const navLink = event.target.closest('[data-nav]');
+        if (navLink) {
+          event.preventDefault();
+          navigate(navLink.dataset.nav);
+          return;
+        }
+
+        const actionButton = event.target.closest('[data-action]');
+        if (!actionButton) return;
+        if (insideMenu && actionButton.getAttribute('role') === 'menuitem') closeActionMenus();
+
+        const { action, id } = actionButton.dataset;
+        if (action === 'new-agent') openAgentDialog();
+        if (action === 'agent-menu') {
+          const menu = document.querySelector(`[data-menu-for="${id}"]`);
+          const willOpen = menu.classList.contains('hidden');
+          closeActionMenus();
+          menu.classList.toggle('hidden', !willOpen);
+          actionButton.setAttribute('aria-expanded', String(willOpen));
+        }
+        if (action === 'contract-menu') {
+          const menu = document.querySelector(`[data-contract-menu-for="${id}"]`);
+          const willOpen = menu.classList.contains('hidden');
+          closeActionMenus();
+          menu.classList.toggle('hidden', !willOpen);
+          actionButton.setAttribute('aria-expanded', String(willOpen));
+        }
+        if (action === 'contract-detail') {
+          const contract = agentContracts.find(item => item.id === id);
+          closeActionMenus();
+          if (contract) openContractDetail(contract);
+        }
+        if (action === 'error-menu') {
+          const menu = document.querySelector(`[data-error-menu-for="${id}"]`);
+          const willOpen = menu.classList.contains('hidden');
+          closeActionMenus();
+          menu.classList.toggle('hidden', !willOpen);
+          actionButton.setAttribute('aria-expanded', String(willOpen));
+        }
+        if (action === 'error-detail') {
+          const entry = errorEntries.find(item => item.id === id);
+          closeActionMenus();
+          if (entry) openErrorDetail(entry);
+        }
+        if (action === 'resolve-error') {
+          const entry = errorEntries.find(item => item.id === id);
+          closeActionMenus();
+          if (entry && entry.status !== 'Resolved') {
+            entry.status = 'Resolved';
+            entry.resolvedAt = new Date().toLocaleString('es-ES');
+            persistErrorEntries();
+            navigate('errors', false);
+            showToast(`Error ${entry.code} marcado como resuelto.`);
+          }
+        }
+        if (action === 'toggle-agent-skills') {
+          const panel = document.getElementById(`agent-skills-${id}`);
+          const willExpand = actionButton.getAttribute('aria-expanded') !== 'true';
+          actionButton.setAttribute('aria-expanded', String(willExpand));
+          panel.classList.toggle('grid-rows-[1fr]', willExpand);
+          panel.classList.toggle('grid-rows-[0fr]', !willExpand);
+
+      function formatCurrency(value) {
+        return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+      }
+
+      function openContractDetail(contract) {
+        const skillTotal = contract.skills.reduce((total, skill) => total + skill.price, 0);
+        const skillRows = contract.skills.map(skill => `<tr class="border-b border-slate-100 last:border-0"><td class="py-3 pr-3 text-sm font-medium text-slate-800">${escapeHtml(skill.name)}</td><td class="py-3 text-right font-mono text-xs text-slate-700">${formatCurrency(skill.price)}</td></tr>`).join('');
+        openDialog({ kind: 'contract-detail', title: `Contrato ${contract.id}`, description: 'Desglose completo del servicio contratado y el pago.', submitLabel: 'Cerrar', content: `<dl class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2"><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Cliente</dt><dd class="mt-1 text-sm font-medium text-slate-800">${escapeHtml(contract.client)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Agente</dt><dd class="mt-1 text-sm font-medium text-slate-800">${escapeHtml(contract.agent)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Fecha de inicio</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(contract.startDate)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Fecha de fin</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(contract.endDate)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Estado del pago</dt><dd class="mt-1 inline-flex items-center gap-1.5 rounded-sm bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-700"><span class="size-1.5 rounded-full bg-emerald-500"></span>${escapeHtml(contract.paymentStatus)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Fecha de pago</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(contract.paymentDate)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Método de pago</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(contract.paymentMethod)}</dd></div></dl><section class="mt-5 border-t border-slate-100 pt-4"><h3 class="text-xs font-semibold text-slate-800">Skills contratadas</h3><div class="mt-2"><table class="w-full"><thead><tr class="text-left text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400"><th class="py-2 pr-3">Skill</th><th class="py-2 text-right">Precio individual</th></tr></thead><tbody>${skillRows}</tbody><tfoot><tr class="border-t border-slate-200"><th class="pt-3 text-left text-xs font-semibold text-slate-700">Total pagado</th><td class="pt-3 text-right font-mono text-sm font-semibold text-slate-950">${formatCurrency(skillTotal)}</td></tr></tfoot></table></div></section>` });
+      }
+
+      function openErrorDetail(entry) {
+        openDialog({ kind: 'error-detail', title: `Detalle del error · ${entry.id}`, description: `${entry.timestamp} · ${entry.agent}`, submitLabel: 'Cerrar', content: `<dl class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2"><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Agente</dt><dd class="mt-1 text-sm font-medium text-slate-800">${escapeHtml(entry.agent)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Timestamp</dt><dd class="mt-1 font-mono text-xs text-slate-700">${escapeHtml(entry.timestamp)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Tipo y código</dt><dd class="mt-1">${errorTypeBadge(entry.type, entry.code)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Estado</dt><dd class="mt-1">${errorResolutionBadge(entry)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Descripción</dt><dd class="mt-1 text-sm leading-5 text-slate-700">${escapeHtml(entry.description)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Mensaje técnico</dt><dd class="mt-1 overflow-x-auto rounded-md bg-slate-50 p-3 font-mono text-xs leading-5 text-slate-700">${escapeHtml(entry.message)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Contexto</dt><dd class="mt-1 text-sm leading-5 text-slate-600">${escapeHtml(entry.details)}</dd></div>${entry.resolvedAt ? `<div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Resuelto el</dt><dd class="mt-1 text-sm text-slate-700">${escapeHtml(entry.resolvedAt)}</dd></div>` : ''}</dl>` });
+      }
+          actionButton.querySelector('[data-lucide="chevron-down"]')?.classList.toggle('rotate-180', willExpand);
+        }
+        if (action === 'configure-agent') {
+          const agent = data.agents.find(item => item.id === id);
+          if (agent) openAgentConfigDialog(agent);
+        }
+        if (action === 'user-menu') {
+          const menu = document.querySelector(`[data-user-menu-for="${id}"]`);
+          const willOpen = menu.classList.contains('hidden');
+          closeActionMenus();
+          menu.classList.toggle('hidden', !willOpen);
+          actionButton.setAttribute('aria-expanded', String(willOpen));
+        }
+        if (action === 'user-detail') {
+          const user = userRecords.find(record => record.id === id);
+          closeActionMenus();
+          if (user) openDialog({ kind: 'user-detail', title: 'Detalle del usuario', description: 'Registro completo de la cuenta.', submitLabel: 'Cerrar', content: `<dl class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2"><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">ID de usuario</dt><dd class="mt-1 font-mono text-xs text-slate-800">${escapeHtml(user.id)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Nombre</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(user.name)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Email</dt><dd class="mt-1 break-all text-sm text-slate-800">${escapeHtml(user.email)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Plan</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(user.plan)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Estado</dt><dd class="mt-1">${userStatusBadge(user.status)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Rol</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(user.role)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Fecha de alta</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(user.joined)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Último acceso</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(user.lastAccess)}</dd></div></dl>` });
+        }
+        if (action === 'delete-user') {
+          const user = userRecords.find(record => record.id === id);
+          closeActionMenus();
+          if (user) {
+            openConfirm('delete-user', '¿Eliminar usuario?', `${user.name} (${user.email}) se quitará de esta lista de demostración. Esta acción no se puede deshacer.`, 'Eliminar usuario', true);
+            modalAction.id = id;
+          }
+        }
+        if (action === 'edit-agent') {
+          const agent = data.agents.find(item => item.id === id);
+          if (agent) openAgentDialog(agent);
+        }
+        if (action === 'toggle-agent') {
+          const agent = data.agents.find(item => item.id === id);
+          if (agent) {
+            agent.status = agent.status === 'Active' ? 'Paused' : 'Active';
+            persistData();
+            renderAgents();
+            showToast(`${agent.name} ${agent.status.toLowerCase()}.`);
+          }
+        }
+        if (action === 'delete-agent') {
+          const agent = data.agents.find(item => item.id === id);
+          if (agent) {
+            modalAction = { kind: 'delete-agent', id };
+            openConfirm('delete-agent', '¿Eliminar agente?', `${agent.name} se quitará de esta lista de demostración. Esta acción no se puede deshacer.`, 'Eliminar', true);
+            modalAction.id = id;
+          }
+        }
+        if (action === 'clear-agent-filters') {
+          document.getElementById('agent-search').value = '';
+          document.getElementById('agent-status-filter').value = 'All';
+          renderAgents();
+        }
+        if (action === 'toggle-category') {
+          const panel = document.getElementById(`skill-group-${actionButton.dataset.category}`);
+          const expanded = actionButton.getAttribute('aria-expanded') === 'true';
+          actionButton.setAttribute('aria-expanded', String(!expanded));
+          panel.classList.toggle('hidden', expanded);
+          actionButton.querySelector('[data-lucide="chevron-down"]')?.classList.toggle('rotate-180', !expanded);
+        }
+        if (action === 'skill-menu') {
+          const skillName = actionButton.dataset.skill;
+          const menu = [...document.querySelectorAll('[data-skill-menu-for]')].find(item => item.dataset.skillMenuFor === skillName);
+          const willOpen = menu.classList.contains('hidden');
+          closeActionMenus();
+          menu.classList.toggle('hidden', !willOpen);
+          actionButton.setAttribute('aria-expanded', String(willOpen));
+        }
+        if (action === 'skill-detail') {
+          closeActionMenus();
+          selectSkill(actionButton.dataset.skill);
+        }
+        if (action === 'delete-skill') {
+          const skillName = actionButton.dataset.skill;
+          const exists = skillGroups.some(group => group.skills.some(skill => skill.name === skillName));
+          closeActionMenus();
+          if (exists) {
+            openConfirm('delete-skill', '¿Eliminar skill?', `${skillName} se quitará del catálogo y de todos los agentes asignados. Esta acción no se puede deshacer.`, 'Eliminar', true);
+            modalAction.skillName = skillName;
+          }
+        }
+        if (action === 'select-skill') selectSkill(actionButton.dataset.skill);
+        if (action === 'toggle-integration') {
+          const integration = data.integrations.find(item => item.id === id);
+          if (integration) {
+            integration.connected = !integration.connected;
+            persistData();
+            renderIntegrations();
+            showToast(`${integration.name} ${integration.connected ? 'connected' : 'disconnected'} in demo.`);
+          }
+        }
+        if (action === 'configure-integration') {
+          const integration = data.integrations.find(item => item.id === id);
+          if (integration) {
+            modalAction = { kind: 'configure-integration', id };
+            openDialog({ kind: 'configure-integration', title: `Configure ${integration.name}`, description: 'Demo preferences are stored locally and do not connect to the service.', submitLabel: 'Save preferences', content: `<label class="block"><span class="text-xs font-semibold text-slate-700">Display name</span><input name="displayName" value="${escapeHtml(integration.name)}" maxlength="60" class="mt-1.5 h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"></label><label class="mt-4 flex items-center gap-2 text-xs text-slate-700"><input name="alerts" type="checkbox" checked class="size-4 accent-teal-700">Show demo alerts for this integration</label>` });
+            modalAction.id = id;
+          }
+        }
+        if (action === 'clear-integration-filter') {
+          document.getElementById('integration-filter').value = 'All';
+          renderIntegrations();
+        }
+        if (action === 'event-detail') {
+          const item = data.activity.find(eventItem => eventItem.id === id);
+          if (item) openDialog({ kind: 'event-detail', title: 'Activity details', description: 'Read-only event record.', submitLabel: 'Close', content: `<dl class="grid grid-cols-1 gap-4 sm:grid-cols-2"><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Time</dt><dd class="mt-1 text-sm text-slate-800">${formatDate(item.date)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Result</dt><dd class="mt-1">${statusBadge(item.result)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Actor</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(item.actor)}</dd></div><div><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Action</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(item.action)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Resource</dt><dd class="mt-1 text-sm text-slate-800">${escapeHtml(item.resource)}</dd></div><div class="sm:col-span-2"><dt class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">Details</dt><dd class="mt-1 text-sm leading-5 text-slate-600">${escapeHtml(item.detail)}</dd></div></dl>` });
+        }
+        if (action === 'clear-activity-filters') {
+          document.getElementById('activity-search').value = '';
+          document.getElementById('activity-type-filter').value = 'All';
+          document.getElementById('activity-result-filter').value = 'All';
+          renderActivity();
+        }
+        if (action === 'refresh-activity') {
+          renderActivity();
+          showToast('Activity list refreshed.');
+        }
+        if (action === 'reset-demo') openConfirm('reset-demo', 'Reset demo data?', 'This restores the original sample agents, integrations, activity, and preferences in this browser.', 'Reset demo data', true);
+        if (action === 'close-dialog') closeDialog();
+      });
+
+      document.getElementById('mobile-open').addEventListener('click', openMobileNav);
+      document.getElementById('mobile-close').addEventListener('click', closeMobileNav);
+      document.getElementById('mobile-overlay').addEventListener('click', closeMobileNav);
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        data.settings.darkMode = !data.settings.darkMode;
+        persistData();
+        applyTheme();
+        refreshIcons();
+      });
+
+      document.addEventListener('input', event => {
+        if (event.target.id === 'agent-search') renderAgents();
+        if (event.target.id === 'activity-search') renderActivity();
+      });
+      document.addEventListener('change', event => {
+        if (event.target.id === 'agent-status-filter') renderAgents();
+        if (event.target.id === 'integration-filter') renderIntegrations();
+        if (['activity-type-filter', 'activity-result-filter'].includes(event.target.id)) renderActivity();
+      });
+
+      document.addEventListener('submit', event => {
+        if (event.target.id === 'settings-form') {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          data.settings.workspace = String(formData.get('workspace') || '').trim();
+          data.settings.admin = String(formData.get('admin') || '').trim();
+          data.settings.failedRuns = formData.has('failedRuns');
+          data.settings.weeklySummary = formData.has('weeklySummary');
+          data.settings.darkMode = formData.has('darkMode');
+          persistData();
+          applyTheme();
+          showToast('Workspace settings saved.');
+          return;
+        }
+        if (event.target.id === 'skill-assignment-form') {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          const skillName = event.target.dataset.skill;
+          const selectedIds = formData.getAll('agentIds');
+          data.agents.forEach(agent => {
+            agent.skills = agent.skills.filter(skill => skill !== skillName);
+            if (selectedIds.includes(agent.id)) agent.skills.push(skillName);
+          });
+          const skill = skillGroups.flatMap(group => group.skills).find(item => item.name === skillName);
+          if (skill) skill.users = data.agents.filter(agent => agent.skills.includes(skillName)).map(agent => agent.name);
+          persistData();
+          navigate('skills', false);
+          selectSkill(skillName);
+          showToast('Skill assignments saved.');
+          return;
+        }
+        if (event.target.id !== 'dialog-form') return;
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const action = modalAction;
+        if (!action) return closeDialog();
+
+        if (action.kind === 'new-agent' || action.kind === 'edit-agent') {
+          const name = String(formData.get('name') || '').trim();
+          if (!name) {
+            const error = document.getElementById('dialog-error');
+            error.textContent = 'Enter an agent name to continue.';
+            error.classList.remove('hidden');
+            event.target.elements.name.focus();
+            return;
+          }
+          if (action.kind === 'new-agent') {
+            const newAgent = { id: `ag-${Date.now()}`, name, owner: String(formData.get('owner') || '').trim() || data.settings.admin, description: String(formData.get('description') || '').trim() || 'No description added', status: String(formData.get('status') || 'Active'), skills: [], lastRun: 'Never' };
+            newAgent.systemPrompt = defaultAgentPrompt(newAgent);
+            data.agents.unshift(newAgent);
+          }
+          else {
+            const agent = data.agents.find(item => item.id === action.id);
+            if (agent) Object.assign(agent, { name, owner: String(formData.get('owner') || '').trim() || data.settings.admin, description: String(formData.get('description') || '').trim() || 'No description added', status: String(formData.get('status') || 'Active') });
+          }
+          persistData();
+          closeDialog();
+          if (currentView === 'agents') renderAgents();
+          showToast(action.kind === 'new-agent' ? 'Agent created in demo.' : 'Agent changes saved.');
+        }
+        if (action.kind === 'configure-agent') {
+          const agent = data.agents.find(item => item.id === action.id);
+          const systemPrompt = String(formData.get('systemPrompt') || '').trim();
+          if (!systemPrompt) {
+            const error = document.getElementById('dialog-error');
+            error.textContent = 'El prompt de sistema no puede estar vacío.';
+            error.classList.remove('hidden');
+            event.target.elements.systemPrompt.focus();
+            return;
+          }
+          if (agent) agent.systemPrompt = systemPrompt;
+          persistData();
+          closeDialog();
+          renderAgents();
+          showToast('Prompt del agente guardado.');
+        }
+        if (action.kind === 'delete-agent') {
+          const agent = data.agents.find(item => item.id === action.id);
+          data.agents = data.agents.filter(item => item.id !== action.id);
+          persistData();
+          closeDialog();
+          renderAgents();
+          showToast(`${agent?.name || 'Agent'} deleted from demo.`);
+        }
+        if (action.kind === 'delete-skill') {
+          const skillName = action.skillName;
+          skillGroups.forEach(group => {
+            group.skills = group.skills.filter(skill => skill.name !== skillName);
+          });
+          data.agents.forEach(agent => {
+            agent.skills = agent.skills.filter(skill => skill !== skillName);
+          });
+          persistData();
+          closeDialog();
+          navigate('skills', false);
+          showToast(`${skillName} se eliminó del catálogo.`);
+        }
+        if (action.kind === 'delete-user') {
+          const user = userRecords.find(record => record.id === action.id);
+          userRecords = userRecords.filter(record => record.id !== action.id);
+          closeDialog();
+          navigate('users', false);
+          showToast(`${user?.name || 'El usuario'} se eliminó de la lista.`);
+        }
+        if (action.kind === 'configure-integration') {
+          const integration = data.integrations.find(item => item.id === action.id);
+          if (integration) integration.displayName = String(formData.get('displayName') || integration.name).trim();
+          persistData();
+          closeDialog();
+          renderIntegrations();
+          showToast('Integration preferences saved locally.');
+        }
+        if (action.kind === 'reset-demo') {
+          data = structuredClone(initialData);
+          data.agents = normalizeAgents(data.agents);
+          errorEntries.splice(0, errorEntries.length, ...structuredClone(initialErrorEntries));
+          persistErrorEntries();
+          persistData();
+          closeDialog();
+          navigate(currentView, false);
+          showToast('Demo data has been reset.');
+        }
+        if (action.kind === 'event-detail' || action.kind === 'user-detail' || action.kind === 'contract-detail' || action.kind === 'error-detail') closeDialog();
+      });
+
+      dialog.addEventListener('click', event => {
+        if (event.target === dialog) closeDialog();
+        if (event.target.closest('[data-close-dialog]')) closeDialog();
+      });
+      dialog.addEventListener('close', () => {
+        modalAction = null;
+        lastFocusedElement?.focus();
+      });
+      dialogForm.addEventListener('click', event => {
+        if (event.target.closest('[data-close-dialog]')) closeDialog();
+      });
+      function closeActionMenus() {
+        document.querySelectorAll('[data-menu-for], [data-user-menu-for], [data-skill-menu-for], [data-contract-menu-for], [data-error-menu-for]').forEach(menu => menu.classList.add('hidden'));
+        document.querySelectorAll('[data-action="agent-menu"], [data-action="user-menu"], [data-action="skill-menu"], [data-action="contract-menu"], [data-action="error-menu"]').forEach(button => button.setAttribute('aria-expanded', 'false'));
+      }
+      window.addEventListener('hashchange', () => navigate(location.hash.replace('#', ''), false));
+      window.addEventListener('popstate', () => navigate(location.hash.replace('#', '') || 'dashboard', false));
+      window.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !dialog.open) {
+          closeActionMenus();
+          closeMobileNav();
+        }
+      });
+
+      updateSidebarProfile();
+      applyTheme();
+      navigate(currentView, false);
+    </script>
+  </body>
+</html>
